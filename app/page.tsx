@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [entered, setEntered] = useState(false);
   const [chosen, setChosen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 const [walkAwayPos, setWalkAwayPos] = useState({
   x: 0,
   y: 0,
@@ -35,6 +36,9 @@ useEffect(() => {
     voiceNote.removeEventListener("pause", restoreMusic);
     voiceNote.removeEventListener("ended", restoreMusic);
   };
+  useEffect(() => {
+  setMounted(true);
+}, []);
 
 }, []);
   return (
@@ -301,7 +305,8 @@ useEffect(() => {
     {/* Rain Overlay */}
 <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-  {[...Array(50)].map((_, i) => (
+ {mounted &&
+  [...Array(50)].map((_, i) => (
 
     <div
       key={i}
