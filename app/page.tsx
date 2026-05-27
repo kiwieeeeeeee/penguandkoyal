@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import ParticlesBackground from "@/components/ParticlesBackground";
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -8,42 +7,47 @@ export default function Home() {
   const [entered, setEntered] = useState(false);
   const [chosen, setChosen] = useState(false);
   const [mounted, setMounted] = useState(false);
-const [walkAwayPos, setWalkAwayPos] = useState({
-  x: 0,
-  y: 0,
-});
-useEffect(() => {
 
-  const bgMusic = document.getElementById("bgMusic") as HTMLAudioElement;
-  const voiceNote = document.getElementById("voiceNote") as HTMLAudioElement;
+  const [walkAwayPos, setWalkAwayPos] = useState({
+    x: 0,
+    y: 0,
+  });
 
-  if (!bgMusic || !voiceNote) return;
-
-  const lowerMusic = () => {
-    bgMusic.volume = 0.15;
-  };
-
-  const restoreMusic = () => {
-    bgMusic.volume = 0.5;
-  };
-
-  voiceNote.addEventListener("play", lowerMusic);
-  voiceNote.addEventListener("pause", restoreMusic);
-  voiceNote.addEventListener("ended", restoreMusic);
-
-  return () => {
-    voiceNote.removeEventListener("play", lowerMusic);
-    voiceNote.removeEventListener("pause", restoreMusic);
-    voiceNote.removeEventListener("ended", restoreMusic);
-  };
   useEffect(() => {
-  setMounted(true);
-}, []);
+    const bgMusic = document.getElementById(
+      "bgMusic"
+    ) as HTMLAudioElement;
 
-}, []);
+    const voiceNote = document.getElementById(
+      "voiceNote"
+    ) as HTMLAudioElement;
+
+    if (!bgMusic || !voiceNote) return;
+
+    const lowerMusic = () => {
+      bgMusic.volume = 0.15;
+    };
+
+    const restoreMusic = () => {
+      bgMusic.volume = 0.5;
+    };
+
+    voiceNote.addEventListener("play", lowerMusic);
+    voiceNote.addEventListener("pause", restoreMusic);
+    voiceNote.addEventListener("ended", restoreMusic);
+
+    return () => {
+      voiceNote.removeEventListener("play", lowerMusic);
+      voiceNote.removeEventListener("pause", restoreMusic);
+      voiceNote.removeEventListener("ended", restoreMusic);
+    };
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
-      <ParticlesBackground />
       {!entered && (
 
   <div className="fixed inset-0 z-[999] bg-black flex items-center justify-center">
@@ -513,12 +517,12 @@ useEffect(() => {
       >
 
         <h2 className="text-6xl md:text-8xl font-black text-pink-300">
-          maybe broken things
+          you know broken things
           can still be loved properly.
         </h2>
 
         <p className="text-zinc-300 text-xl max-w-2xl mx-auto leading-relaxed">
-          maybe this story still deserves another chapter.
+          this story still deserves another chapter.
         </p>
 
         <div className="text-7xl animate-pulse">
